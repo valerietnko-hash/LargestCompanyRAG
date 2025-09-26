@@ -16,10 +16,14 @@ for message in st.session_state.messages:
 
 # Handle user input
 if prompt := st.chat_input("Ask a question about the 100 largest companies in the US"):
+    
     # Display user message in chat message container
-    #st.chat_message("user").markdown(prompt)
     st.session_state.messages.append({"role": "user", "content": prompt})
-
+    
+    # Display the latest user message
+    with st.chat_message("user"):
+        st.markdown(prompt)
+    
     # Get the response from the model
     info = retriever.invoke(prompt)
     result=chain.invoke({"info":info,"question":prompt})
