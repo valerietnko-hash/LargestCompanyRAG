@@ -13,5 +13,12 @@ template="""
 prompt=ChatPromptTemplate.from_template(template)
 chain=prompt | model
 
-result=chain.invoke({"info":[],"question":"Which company has the highest revenue?"})
-print(result)
+while True:
+    print("\n\n----------------------")
+    question=input("Enter your question (q to quit): ")
+    print("\n\n")
+    if question=="q":
+        break
+
+    result=chain.invoke({"info":[],"question":question})
+    print(result)
