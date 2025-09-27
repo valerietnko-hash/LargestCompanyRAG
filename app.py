@@ -1,9 +1,10 @@
 import streamlit as st
 from main import chain
 from vector import retriever
+import time
 
 # Title of the app
-st.title("RAG with the 100 Largest Companies in the US")
+st.title("✨ Enquiry on the 100th Largest Companies in the US")
 
 # Retain previous inputs 
 if "messages" not in st.session_state:
@@ -28,6 +29,17 @@ if prompt := st.chat_input("Ask a question about the 100 largest companies in th
     info = retriever.invoke(prompt)
     result=chain.invoke({"info":info,"question":prompt})
 
+    # Simulate streaming by displaying the answer character by character
+    assistant_placeholder = st.empty()
+    streamed_text = ""
+    for char in result:
+        streamed_text += char
+        assistant_placeholder.markdown(streamed_text)
+        time.sleep(0.02)  # Small delay for effect
+
+
+
     # Display assistant response in chat message container
     st.session_state.messages.append({"role": "assistant", "content": result})
-    st.chat_message("assistant").markdown(result)
+    #st.chat_message("assistant").markdown(result)
+    assistant_placeholder.markdown(result)
