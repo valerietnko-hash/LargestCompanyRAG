@@ -4,7 +4,7 @@ from vector import retriever
 import time
 
 # Title of the app
-st.title("✨ Enquiry on the 100th Largest Companies in the US")
+st.title("✨ Enquiry on the 100 Largest Companies in the US")
 
 # Retain previous inputs 
 if "messages" not in st.session_state:
